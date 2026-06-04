@@ -1,0 +1,16 @@
+#!/bin/bash
+# Reports disk usage in MB for each user that has a home directory under /home,
+# plus root. Output format: username size_MB
+#
+# Pipe into disk-reporter to see the result:
+#   bash generate-disk-usage | ./disk-reporter
+
+for homedir in /home/*/; do
+    [ -d "$homedir" ] || continue
+    user=$(basename "$homedir")
+    size=$(du -sm "$homedir" 2>/dev/null | cut -f1)
+    echo "$user $size"
+done
+
+root_size=$(du -sm /root 2>/dev/null | cut -f1)
+echo "root $root_size"

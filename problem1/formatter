@@ -1,0 +1,21 @@
+#!/bin/env bash
+
+# HINT: You can test the result of this script using the following command:
+# echo "budi santoso" | ./formatter
+
+# Step 1: Read both words from a single read -r command into two variables.
+#   Bash splits the input on whitespace automatically.
+read -r first_name last_name
+
+# Step 2: Convert last_name to ALL CAPS.
+#   Bash parameter expansion has a ^^ suffix that uppercases all characters.
+#   e.g. city="jakarta" → ${city^^} → "JAKARTA"
+
+# Step 3: Make first_name Title Case (first letter uppercase, rest lowercase).
+#   Two expansions in sequence: ,, to lowercase everything, then ^ for the first character.
+#   e.g. word="PYTHON" → ${word,,} → "python" → ${word^} → "Python"
+
+# Step 4: Print the result in the format: "LASTNAME, Firstname"
+
+# TODO: Replace this line with your implementation
+echo "TODO"

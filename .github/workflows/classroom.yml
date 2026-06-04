@@ -1,0 +1,324 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Problem 1 - Name Formatter
+    - name: P1 - budi santoso
+      id: p1test1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - budi santoso
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: budi santoso
+        expected-output: 'SANTOSO, Budi'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P1 - john doe
+      id: p1test2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - john doe
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: john doe
+        expected-output: 'DOE, John'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P1 - siti rahayu
+      id: p1test3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - siti rahayu
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: siti rahayu
+        expected-output: 'RAHAYU, Siti'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P1 - ahmad fauzi
+      id: p1test4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P1 - ahmad fauzi
+        setup-command: chmod +x ./problem1/formatter
+        command: ./problem1/formatter
+        input: ahmad fauzi
+        expected-output: 'FAUZI, Ahmad'
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+
+    # Problem 2 - Memory Checker
+    - name: P2 - 8GB normal
+      id: p2test1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P2 - 8GB normal
+        setup-command: chmod +x ./problem2/memory-checker
+        command: ./problem2/memory-checker
+        input: |
+          8000
+          2000
+        expected-output: |
+          Free: 6000 MB
+          Usage: 25%
+          Status: Normal
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P2 - 4GB warning
+      id: p2test2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P2 - 4GB warning
+        setup-command: chmod +x ./problem2/memory-checker
+        command: ./problem2/memory-checker
+        input: |
+          4000
+          3200
+        expected-output: |
+          Free: 800 MB
+          Usage: 80%
+          Status: Warning
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P2 - 2GB critical
+      id: p2test3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P2 - 2GB critical
+        setup-command: chmod +x ./problem2/memory-checker
+        command: ./problem2/memory-checker
+        input: |
+          2000
+          1900
+        expected-output: |
+          Free: 100 MB
+          Usage: 95%
+          Status: Critical
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+    - name: P2 - 16GB warning
+      id: p2test4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P2 - 16GB warning
+        setup-command: chmod +x ./problem2/memory-checker
+        command: ./problem2/memory-checker
+        input: |
+          16000
+          11200
+        expected-output: |
+          Free: 4800 MB
+          Usage: 70%
+          Status: Warning
+        comparison-method: exact
+        timeout: 10
+        max-score: 5
+
+    # Problem 3 - File Classifier
+    - name: P3 - mixed files
+      id: p3test1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P3 - mixed files
+        setup-command: chmod +x ./problem3/file-classifier
+        command: ./problem3/file-classifier
+        input: |
+          install.sh
+          backup.sh
+          system.log
+          nginx.conf
+          readme.txt
+          deploy.sh
+          error.log
+        expected-output: |
+          Scripts (.sh): 3
+          Logs (.log): 2
+          Configs (.conf): 1
+          Others: 1
+        comparison-method: exact
+        timeout: 10
+        max-score: 7
+    - name: P3 - no others
+      id: p3test2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P3 - no others
+        setup-command: chmod +x ./problem3/file-classifier
+        command: ./problem3/file-classifier
+        input: |
+          app.log
+          web.conf
+          run.sh
+          debug.log
+          test.sh
+        expected-output: |
+          Scripts (.sh): 2
+          Logs (.log): 2
+          Configs (.conf): 1
+          Others: 0
+        comparison-method: exact
+        timeout: 10
+        max-score: 7
+    - name: P3 - all others
+      id: p3test3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P3 - all others
+        setup-command: chmod +x ./problem3/file-classifier
+        command: ./problem3/file-classifier
+        input: |
+          photo.jpg
+          music.mp3
+          video.mp4
+          notes.txt
+        expected-output: |
+          Scripts (.sh): 0
+          Logs (.log): 0
+          Configs (.conf): 0
+          Others: 4
+        comparison-method: exact
+        timeout: 10
+        max-score: 7
+    - name: P3 - equal types
+      id: p3test4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P3 - equal types
+        setup-command: chmod +x ./problem3/file-classifier
+        command: ./problem3/file-classifier
+        input: |
+          start.sh
+          stop.sh
+          access.log
+          error.log
+          app.conf
+          db.conf
+        expected-output: |
+          Scripts (.sh): 2
+          Logs (.log): 2
+          Configs (.conf): 2
+          Others: 0
+        comparison-method: exact
+        timeout: 10
+        max-score: 7
+
+    # Problem 4 - Disk Reporter
+    - name: P4 - small team
+      id: p4test1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P4 - small team
+        setup-command: chmod +x ./problem4/disk-reporter
+        command: ./problem4/disk-reporter
+        input: |
+          alice 1200
+          bob 450
+          charlie 2800
+          dave 900
+        expected-output: |
+          Total usage: 5350 MB
+          Highest user: charlie (2800 MB)
+          Users over 1000 MB: 2
+        comparison-method: exact
+        timeout: 10
+        max-score: 8
+    - name: P4 - server users
+      id: p4test2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P4 - server users
+        setup-command: chmod +x ./problem4/disk-reporter
+        command: ./problem4/disk-reporter
+        input: |
+          root 3500
+          user1 800
+          user2 1100
+          user3 200
+          user4 650
+        expected-output: |
+          Total usage: 6250 MB
+          Highest user: root (3500 MB)
+          Users over 1000 MB: 2
+        comparison-method: exact
+        timeout: 10
+        max-score: 8
+    - name: P4 - no heavy users
+      id: p4test3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P4 - no heavy users
+        setup-command: chmod +x ./problem4/disk-reporter
+        command: ./problem4/disk-reporter
+        input: |
+          alice 500
+          bob 500
+          charlie 500
+        expected-output: |
+          Total usage: 1500 MB
+          Highest user: alice (500 MB)
+          Users over 1000 MB: 0
+        comparison-method: exact
+        timeout: 10
+        max-score: 8
+    - name: P4 - dev team
+      id: p4test4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: P4 - dev team
+        setup-command: chmod +x ./problem4/disk-reporter
+        command: ./problem4/disk-reporter
+        input: |
+          dev1 2000
+          dev2 1500
+          dev3 3000
+          ops1 800
+          ops2 400
+        expected-output: |
+          Total usage: 7700 MB
+          Highest user: dev3 (3000 MB)
+          Users over 1000 MB: 3
+        comparison-method: exact
+        timeout: 10
+        max-score: 8
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        P1TEST1_RESULTS: "${{steps.p1test1.outputs.result}}"
+        P1TEST2_RESULTS: "${{steps.p1test2.outputs.result}}"
+        P1TEST3_RESULTS: "${{steps.p1test3.outputs.result}}"
+        P1TEST4_RESULTS: "${{steps.p1test4.outputs.result}}"
+        P2TEST1_RESULTS: "${{steps.p2test1.outputs.result}}"
+        P2TEST2_RESULTS: "${{steps.p2test2.outputs.result}}"
+        P2TEST3_RESULTS: "${{steps.p2test3.outputs.result}}"
+        P2TEST4_RESULTS: "${{steps.p2test4.outputs.result}}"
+        P3TEST1_RESULTS: "${{steps.p3test1.outputs.result}}"
+        P3TEST2_RESULTS: "${{steps.p3test2.outputs.result}}"
+        P3TEST3_RESULTS: "${{steps.p3test3.outputs.result}}"
+        P3TEST4_RESULTS: "${{steps.p3test4.outputs.result}}"
+        P4TEST1_RESULTS: "${{steps.p4test1.outputs.result}}"
+        P4TEST2_RESULTS: "${{steps.p4test2.outputs.result}}"
+        P4TEST3_RESULTS: "${{steps.p4test3.outputs.result}}"
+        P4TEST4_RESULTS: "${{steps.p4test4.outputs.result}}"
+      with:
+        runners: p1test1,p1test2,p1test3,p1test4,p2test1,p2test2,p2test3,p2test4,p3test1,p3test2,p3test3,p3test4,p4test1,p4test2,p4test3,p4test4

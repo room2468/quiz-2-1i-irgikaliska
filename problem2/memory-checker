@@ -1,0 +1,27 @@
+#!/bin/env bash
+
+# HINT: You can test the result of this script using the following command:
+# printf "8000\n2000\n" | ./memory-checker
+
+# Step 1: Read two numbers from stdin.
+#   First line = total RAM in MB, second line = used RAM in MB.
+read -r total_mb
+read -r used_mb
+
+# Step 2: Calculate free MB using bash arithmetic expansion $(( )) with subtraction.
+#   e.g. $(( 10 - 3 )) gives 7
+
+# Step 3: Calculate usage percentage using $(( )) with multiplication and division.
+#   Bash performs integer division by default — no decimal needed.
+#   e.g. $(( 3 * 100 / 10 )) gives 30
+
+# Step 4: Determine status using if/elif/else with arithmetic conditions (( )).
+#   Check the 90% threshold first, then 70%, then fall through to Normal.
+#   e.g. if (( temp >= 100 )); then state="boiling"
+#        elif (( temp >= 0 )); then state="liquid"
+#        else state="frozen"; fi
+
+# Step 5: Print the three output lines using echo, embedding variables directly.
+
+# TODO: Replace this line with your implementation
+echo "TODO"

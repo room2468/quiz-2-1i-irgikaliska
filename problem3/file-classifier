@@ -1,0 +1,29 @@
+#!/bin/env bash
+
+# HINT: You can test the result of this script using the following command:
+# printf "install.sh\nbackup.sh\nsystem.log\nnginx.conf\nreadme.txt\n" | ./file-classifier
+
+# This script reads a list of filenames (one per line) and counts them by type.
+
+scripts=0
+logs=0
+configs=0
+others=0
+
+while IFS= read -r filename || [[ -n "$filename" ]]; do
+    # Use a case statement on "$filename" with wildcard suffix patterns.
+    # Four branches: one per extension, and a catch-all * for everything else.
+    #   e.g. case "$item" in
+    #            *.jpg) (( images++ )) ;;
+    #            *.mp3) (( audio++ ))  ;;
+    #            *)     (( rest++ ))   ;;
+    #        esac
+
+    # TODO: Replace this line with your case statement
+    echo "TODO"
+done
+
+echo "Scripts (.sh): $scripts"
+echo "Logs (.log): $logs"
+echo "Configs (.conf): $configs"
+echo "Others: $others"

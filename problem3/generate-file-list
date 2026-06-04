@@ -1,0 +1,10 @@
+#!/bin/bash
+# Lists filenames (without full path) from a directory.
+# Default directory: /etc
+# Usage: bash generate-file-list [directory]
+#
+# Pipe into file-classifier to see the result:
+#   bash generate-file-list /etc | ./file-classifier
+
+dir="${1:-/etc}"
+ls -1 "$dir" 2>/dev/null

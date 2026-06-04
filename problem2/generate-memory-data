@@ -1,0 +1,14 @@
+#!/bin/bash
+# Reads real memory information from the current system and outputs two numbers:
+#   Line 1: total RAM in MB
+#   Line 2: used RAM in MB
+#
+# Pipe into memory-checker to see the result:
+#   bash generate-memory-data | ./memory-checker
+
+total_kb=$(grep "^MemTotal:" /proc/meminfo | awk '{print $2}')
+available_kb=$(grep "^MemAvailable:" /proc/meminfo | awk '{print $2}')
+used_kb=$(( total_kb - available_kb ))
+
+echo $(( total_kb / 1024 ))
+echo $(( used_kb / 1024 ))
