@@ -11,11 +11,18 @@ read -r first_name last_name
 #   Bash parameter expansion has a ^^ suffix that uppercases all characters.
 #   e.g. city="jakarta" → ${city^^} → "JAKARTA"
 
+
 # Step 3: Make first_name Title Case (first letter uppercase, rest lowercase).
 #   Two expansions in sequence: ,, to lowercase everything, then ^ for the first character.
 #   e.g. word="PYTHON" → ${word,,} → "python" → ${word^} → "Python"
 
 # Step 4: Print the result in the format: "LASTNAME, Firstname"
 
+
 # TODO: Replace this line with your implementation
-echo "TODO"
+last_upper=${last_name^^}
+
+first_title=${first_name,,}
+first_title=${first_title^}
+
+echo "$last_upper, $first_title"

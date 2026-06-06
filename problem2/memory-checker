@@ -24,4 +24,18 @@ read -r used_mb
 # Step 5: Print the three output lines using echo, embedding variables directly.
 
 # TODO: Replace this line with your implementation
-echo "TODO"
+free_mb=$(( total_mb - used_mb ))
+
+usage=$(( used_mb * 100 / total_mb ))
+
+if (( usage >= 90 )); then
+    status="Critical"
+elif (( usage >= 70 )); then
+    status="Warning"
+else
+    status="Normal"
+fi
+
+echo "Free: $free_mb MB"
+echo "Usage: $usage%"
+echo "Status: $status"

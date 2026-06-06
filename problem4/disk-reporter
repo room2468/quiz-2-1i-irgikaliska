@@ -25,7 +25,18 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     #   e.g. if (( val > 50 )); then (( count++ )); fi
 
     # TODO: Replace this line with your implementation (Steps 1-4)
-    echo "TODO"
+    read -r username size <<< "$line"
+
+    (( total += size ))
+
+    if (( size > highest_size )); then
+        highest_size=$size
+        highest_user=$username
+    fi
+
+    if (( size > 1000 )); then
+        (( over_limit++ ))
+    fi
 done
 
 echo "Total usage: $total MB"
